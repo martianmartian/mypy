@@ -1,0 +1,4 @@
+,layer3,layer2,layer1,layer5,layer4,response_type
+0,0.1,0.1,0.1,0.1,0.1,tanh
+1,0.2,0.2,0.2,0.2,0.2,tanh
+2,0.3,0.3,0.3,0.3,0.3,tanh

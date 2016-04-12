@@ -1,0 +1,144 @@
+# option days is [21,22,23,24,25,26,27,28,29,30,31,01,02,03,12,14,16,17,18]
+# train: input the training days, please use ',' to separate different day
+21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 01, 02, 03, 12
+# test days: input the testing days, please use ',' to separate different day   14:1176 0.812, 16:2524  0.702, 17:2758 0.644, 18:1834 0.628
+14
+
+21:1849  22:2524  23:3012  24:1409  25:2383  26:2153  27:1791  28:2416  29:2009  30:1612  31:1891  01:2191  02:555  03:1370  12:2587  14:1176  16:2524  17:2758  18:1834
+
+/home/aurora/software/anaconda2/bin/python2.7 /home/aurora/hdd/workspace/PycharmProjects/annet/aurora_dnn/generate_aurora_file.py
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data21.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data21.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data21.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data21.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data21.npy (1071, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data21.npy (83, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data21.npy (290, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data21.npy (405, 65537)
+1849
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data22.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data22.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data22.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data22.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data22.npy (186, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data22.npy (231, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data22.npy (55, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data22.npy (2052, 65537)
+2524
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data23.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data23.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data23.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data23.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data23.npy (1337, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data23.npy (244, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data23.npy (515, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data23.npy (916, 65537)
+3012
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data24.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data24.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data24.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data24.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data24.npy (414, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data24.npy (137, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data24.npy (835, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data24.npy (23, 65537)
+1409
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data25.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data25.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data25.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data25.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data25.npy (270, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data25.npy (618, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data25.npy (1238, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data25.npy (257, 65537)
+2383
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data26.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data26.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data26.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data26.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data26.npy (179, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data26.npy (253, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data26.npy (147, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data26.npy (1574, 65537)
+2153
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data27.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data27.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data27.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data27.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data27.npy (258, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data27.npy (639, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data27.npy (395, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data27.npy (499, 65537)
+1791
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data28.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data28.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data28.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data28.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data28.npy (815, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data28.npy (330, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data28.npy (382, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data28.npy (889, 65537)
+2416
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data29.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data29.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data29.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data29.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data29.npy (910, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data29.npy (327, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data29.npy (575, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data29.npy (197, 65537)
+2009
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data30.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data30.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data30.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data30.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data30.npy (411, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data30.npy (261, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data30.npy (808, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data30.npy (132, 65537)
+1612
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data31.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data31.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data31.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data31.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data31.npy (751, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data31.npy (468, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data31.npy (5, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data31.npy (667, 65537)
+1891
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data01.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data01.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data01.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data01.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data01.npy (1176, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data01.npy (555, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data01.npy (142, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data01.npy (318, 65537)
+2191
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data02_back.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data02.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data02.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data02.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data02_back.npy (0, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data02.npy (96, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data02.npy (117, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data02.npy (342, 65537)
+555
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data03.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data03.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data03.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data03.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data03.npy (250, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data03.npy (368, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data03.npy (101, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data03.npy (651, 65537)
+1370
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data12.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data12.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data12.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data12.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data12.npy (471, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data12.npy (978, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data12.npy (866, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data12.npy (272, 65537)
+2587
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data14.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data14.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data14.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data14.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data14.npy (164, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data14.npy (176, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data14.npy (77, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data14.npy (759, 65537)
+1176
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data16.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data16.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data16.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data16.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data16.npy (513, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data16.npy (401, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data16.npy (1197, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data16.npy (413, 65537)
+2524
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data17.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data17.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data17.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data17.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data17.npy (262, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data17.npy (580, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data17.npy (1573, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data17.npy (343, 65537)
+2758
+----------------------------------------------
+['/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data18.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data18.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data18.npy', '/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data18.npy']
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type2_data18.npy (344, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type4_data18.npy (170, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type1_data18.npy (838, 65537)
+/home/aurora/hdd/workspace/PycharmProjects/data/aurora2/npy_data/type3_data18.npy (482, 65537)
+1834
+----------------------------------------------
+
+Process finished with exit code 0
