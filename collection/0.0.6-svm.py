@@ -1,21 +1,4 @@
 
-================ Tricks ================
-'''fancy indexing'''
-import numpy as np
-
-scores = np.random.random((5,5))
-index_x = range(scores.shape[0])
-index_y = np.random.randint(low=0,high=4,size=(scores.shape[0],))
-print index_y
-selected = scores[index_x,index_y]
-print selected.shape
-print selected
-
-''' create one more dimension '''
-selected = selected[:, np.newaxis]
-print selected.shape
-print selected
-
 
 
 ================ SVM begin ================
