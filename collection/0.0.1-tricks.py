@@ -63,43 +63,100 @@ print scores[a,b]
 
 
 ''' create one more dimension '''
-selected = selected[:, np.newaxis]
-print selected.shape
-print selected
+        selected = selected[:, np.newaxis]
+        print selected.shape
+        print selected
 
 
 
 '''thresholding / comparing  true/false vector'''
-p=0.5
-H1 = np.arange(10).reshape((2,5))
-print H1
-U1 = np.random.rand(*H1.shape)
-
-print U1
-U1 = U1<p
-print U1
-# U1 = np.random.rand(*H1.shape) < p   # Binary mask
-H1 *= U1
-print H1
+        p=0.5
+        H1 = np.arange(10).reshape((2,5))
+        U1 = np.random.rand(*H1.shape)
+        H1 *= (U1<p)
+        # H1 = H1*(U1<p)
 
 
-
-print True+0.001
-print False+0.001
+        print True+0.001
+        print False+0.001
 
 
 
 '''high dimension vector reshape'''
-X_train = np.random.random((100,5,5,2))
-print X_train.shape
-X_train = np.reshape(X_train, (X_train.shape[0], -1))
-print X_train.shape
+        X_train = np.random.random((100,5,5,2))
+        X_train = X_train.reshape(X_train.shape[0], -1)
+
+        np.set_printoptions(suppress=False)
+        img = np.random.randint(low=0,high=255,size=(3,32,32))
+        # img = np.random.randint(low=0,high=255,size=(3,2,2))
+        print img
+        print "=================="
+        print img.reshape(-1)
+        print "=================="
+        print img.reshape(3, -1)
+        print "=================="
 
 
-'''subsample data / extract'''
-# X_train : (500000,32,32,3)
-# Subsample the data for more efficient code execution in this exercise
-num_training = 5000
-mask = range(num_training)
-X_train = X_train[mask]
-y_train = y_train[mask]
+''' Subsample the data '''
+        # X_train = np.random.random(50000)
+        X_train = np.random.random((5000,32,32,3))
+        # print X_train[0:500].shape
+        num_training = 500
+        mask = np.arange(num_training)
+        X_train = X_train[mask]
+
+
+
+================ collections / Counter Tricks ================
+from collections import Counter
+        
+        'basics'
+        # c = Counter(['a', 'b', 'c', 'a', 'b', 'b'])
+        c = Counter()
+        print 'Initial :', c
+        c.update('abcdaab')
+        print 'Sequence:', c
+        c.update(['aa', 'b', 'c', 'a', 'b', 'b'])
+        print 'Sequence:', c
+        c.update('aaaaa')
+        print 'Sequence:', c
+
+        print c['a']
+        for letter in 'abcde':
+            print '%s : %d' % (letter, c[letter])
+
+
+        c = Counter('extremelyfatthatamericaissfsdfsd')
+        c['z'] = 0
+        print list(c.elements())
+        # ['e', 'e', 'e', 'm', 'l', 'r', 't', 'y', 'x']
+        print list(c.values())
+        # [3, 1, 1, 1, 1, 1, 1, 0]
+        print c.most_common(2)
+        print c.most_common(2)[0]
+        print c.most_common(2)[0][0]  # the label...
+
+
+
+        classes = ['plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+        for y, cls in enumerate(classes):
+          print 'y:', y, 'cls:',cls
+          # y: 0 cls: plane
+
+        classes = [('e', 3), ('m', 1)]
+        for a, b in classes:
+          print a,b
+
+        c = Counter('extremelyf')
+        for letter in 'abcde':
+            print '%s : %d' % (letter, c[letter])
+
+
+        c = collections.Counter()
+        with open('/usr/share/dict/words', 'rt') as f:
+            for line in f:
+                c.update(line.rstrip().lower())
+
+        print 'Most common:'
+        for letter, count in c.most_common(3):
+            print '%s: %7d' % (letter, count)
