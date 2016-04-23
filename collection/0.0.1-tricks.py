@@ -45,7 +45,14 @@ print scores[a,b]
     ex_0 = np.arange(neuronsIndex.shape[0])
     ex_1 = np.random.randint(low=0,high=neuronsIndex.shape[1],size=(neuronsIndex.shape[0],))
     print neuronsVals[neuronsIndex[ex_0,ex_1]]
-
+    '''# go and pick'''
+    x = np.random.random((100,32,32,3))
+    y = np.random.randint(low=0,high=10,size=(100,10))
+    go = np.arange(100)
+    pick = np.random.randint(low=0,high=10,size=(100,))
+    fruit = y[go,pick]
+    print fruit.shape
+    print fruit
 
 
 '''argsort inexing'''
@@ -76,11 +83,24 @@ print scores[a,b]
         H1 *= (U1<p)
         # H1 = H1*(U1<p)
 
-
         print True+0.001
         print False+0.001
 
+                                '''another example'''
+                                y_test_pred = np.array([ 0,1,8,8,6,])
+                                y_test = np.arange(5)
+                                print y_test == y_test_pred
+                                print y_test < y_test_pred
+                                print y_test_pred < 4
 
+                                y_test_pred *= (y_test < y_test_pred)
+                                print y_test_pred
+        
+        '''print accuracy'''
+        num_correct = np.sum(y_test_pred == y_test)
+          # np.mean(Yte_predict == Yte)
+        accuracy = float(num_correct) / num_test
+        print 'Got %d / %d correct => accuracy: %f' % (num_correct, num_test, accuracy)
 
 '''high dimension vector reshape'''
         X_train = np.random.random((100,5,5,2))
@@ -105,7 +125,51 @@ print scores[a,b]
         mask = np.arange(num_training)
         X_train = X_train[mask]
 
+'''trivia'''
+        np.mean(X_train, axis=0)
 
+'''truncating array'''
+        a = np.random.randint(low=0,high=10,size=(4,11))
+        print a
+        print a[:,:-1].shape
+        print a[:,:-1]
+        print a[:,:-3].shape
+        print a[:,:-3]
+        print a[:,:-5].shape
+        print a[:,:-5]
+        print a[:-1,:]
+        print a[:-3,:]
+        print a[:-2,:-2]
+
+'''# summation with specified signs/magnitude from index'''
+        x = np.arange(10)  # 45 total
+        ones = np.ones(x.shape)
+        print x.dot(ones)
+        index = np.ones(x.shape)
+        print index[4]
+        index[4]=10
+        print index
+        print x[4]
+        print x.dot(index)
+
+        Y = np.ones((3,5))
+        X = np.arange(50).reshape(10,5)
+        W = np.zeros((3,10))
+        print 'X'
+        print X.T
+        print 'Y'
+        print Y
+        print 'np.dot(Y,X.T)'   # (3,10)
+        print np.dot(Y,X.T)
+
+
+'''# syntax change'''
+      x = np.random.random((2,5))-0.5
+      zeros = np.zeros(x.shape)
+      print np.maximum(zeros,x)
+      print np.maximum(0,x)
+      zeros2 = np.zeros((1,x.shape[1]))
+      print np.maximum(zeros2,x)
 
 ================ collections / Counter Tricks ================
 from collections import Counter
@@ -160,3 +224,41 @@ from collections import Counter
         print 'Most common:'
         for letter, count in c.most_common(3):
             print '%s: %7d' % (letter, count)
+
+
+================ utility functions ================
+''' timer '''
+        x = np.random.random((5000,32,32,3))
+        def reshape(x):
+          for i in range(10000):
+            x.reshape(5000,-1)
+
+        def time_function(f, *args):
+          import time
+          tic = time.time()
+          f(*args)
+          toc = time.time()
+          return toc - tic
+
+        time = time_function(reshape, x)
+        print time
+
+'''or'''
+      import time
+      tic = time.time()
+      _, grad_naive = svm_loss_naive(W, X_train, y_train, 0.00001)
+      toc = time.time()
+      print 'Naive loss and gradient: computed in %fs' % (toc - tic)
+
+      tic = time.time()
+      _, grad_vectorized = svm_loss_vectorized(W, X_train, y_train, 0.00001)
+      toc = time.time()
+      print 'Vectorized loss and gradient: computed in %fs' % (toc - tic)
+
+      # The loss is a single number, so it is easy to compare the values computed
+      # by the two implementations. The gradient on the other hand is a matrix, so
+      # we use the Frobenius norm to compare them. 
+      difference = np.linalg.norm(grad_naive - grad_vectorized, ord='fro')
+      print 'difference: %f' % difference
+
+

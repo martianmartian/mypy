@@ -67,9 +67,15 @@ def svm_loss_vectorized(W, X, y, reg):
   
   # Get dims
   D = X.shape[0]
-  num_classes = W.shape[0]
-  num_train = X.shape[1]
-  scores = W.dot(X)
+  num_classes = W.shape[0]   
+  num_train = X.shape[1]  
+  scores = W.dot(X)   
+
+  #scores: (10,9)
+
+  # W: (10, 3073)
+  # X: (3073, 9)
+  # y: (9, )
 
   # Construct correct_scores vector that is Dx1 (or 1xD) so we can subtract out
   # where we append the "true" scores: [W*X]_{y_1, 1}, [W*X]_{y_2, 2}, ..., [W*X]_{y_D, D}
@@ -78,12 +84,15 @@ def svm_loss_vectorized(W, X, y, reg):
   # correct_scores = np.diag(scores[y,:])
   # Fast (index in both directions):
   correct_scores = scores[y, np.arange(num_train)] # using the fact that all elements in y are < C == num_classes
+  print 'y.shape', y.shape
+  print 'num_train', num_train
 
   mat = scores - correct_scores + 1 # like above, delta = 1
   mat[y, np.arange(num_train)] = 0 # accounting for the j=y_i term we shouldn't count (subtracting 1 makes up for it since w_j = w_{y_j} in this case)
   
   # Compute max
-  thresh = np.maximum(np.zeros((num_classes,num_train)), mat)
+  # thresh = np.maximum(np.zeros((num_classes,num_train)), mat)
+  thresh = np.maximum(0, mat)
 
   # Compute loss as double sum
   loss = np.sum(thresh)

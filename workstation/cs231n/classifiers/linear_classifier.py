@@ -4,8 +4,9 @@ from cs231n.classifiers.softmax import *
 
 class LinearClassifier:
 
-  def __init__(self):
-    self.W = None
+  def __init__(self,W):
+    # self.W = None
+    self.W = W
 
   def train(self, X, y, learning_rate=1e-3, reg=1e-5, num_iters=100,
             batch_size=200, verbose=False):

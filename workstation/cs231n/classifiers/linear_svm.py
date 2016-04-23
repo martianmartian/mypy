@@ -67,9 +67,15 @@ def svm_loss_vectorized(W, X, y, reg):
   
   # Get dims
   D = X.shape[0]
-  num_classes = W.shape[0]
-  num_train = X.shape[1]
-  scores = W.dot(X)
+  num_classes = W.shape[0]   
+  num_train = X.shape[1]  
+  scores = W.dot(X)   
+
+  #scores: (10,17)
+
+  # W: (10, 3073)
+  # X: (3073, 17)
+  # y: (17, )
 
   # Construct correct_scores vector that is Dx1 (or 1xD) so we can subtract out
   # where we append the "true" scores: [W*X]_{y_1, 1}, [W*X]_{y_2, 2}, ..., [W*X]_{y_D, D}
@@ -78,12 +84,21 @@ def svm_loss_vectorized(W, X, y, reg):
   # correct_scores = np.diag(scores[y,:])
   # Fast (index in both directions):
   correct_scores = scores[y, np.arange(num_train)] # using the fact that all elements in y are < C == num_classes
+  #scores: (10,17)
+  #y: (17,)
+  #num_train: 17
+  #correct_scores: (17,)
+  # print scores
+  # print correct_scores
 
   mat = scores - correct_scores + 1 # like above, delta = 1
+  # print 'mat.shape', mat.shape
+  # print mat
   mat[y, np.arange(num_train)] = 0 # accounting for the j=y_i term we shouldn't count (subtracting 1 makes up for it since w_j = w_{y_j} in this case)
   
   # Compute max
-  thresh = np.maximum(np.zeros((num_classes,num_train)), mat)
+  # thresh = np.maximum(np.zeros((num_classes,num_train)), mat)
+  thresh = np.maximum(0, mat)
 
   # Compute loss as double sum
   loss = np.sum(thresh)
@@ -109,13 +124,19 @@ def svm_loss_vectorized(W, X, y, reg):
   # (1) for all j: dW[j,:] = sum_{i, j produces positive margin with i} X[:,i].T
   # (2) for all i: dW[y[i],:] = sum_{j != y_i, j produces positive margin with i} -X[:,i].T
   col_sum = np.sum(binary, axis=0)
+  # print col_sum
+  # print "================"
+  # print binary
+  # print "================"
   binary[y, range(num_train)] = -col_sum[range(num_train)]
+  # print binary
+  # print "================"
   dW = np.dot(binary, X.T)
-
+  # print 'X.T', X.T.shape
   # Divide
   dW /= num_train
-
   # Regularize
   dW += reg*W
+  # print dW
 
   return loss, dW
