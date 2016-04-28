@@ -86,19 +86,33 @@ def softmax_loss_vectorized(W, X, y, reg):
   f = np.dot(W, X)
 
   # Normalization trick to avoid numerical instability, per http://cs231n.github.io/linear-classify/#softmax
-  f -= np.max(f)
+  # f -= np.max(f)
+  f -= np.max(f,axis=1,keepdims=True)
+  expf = np.exp(f)
+  sum_expf = expf.sum(axis=1,keepdims=True)
+
 
   # Loss: L_i = - f(x_i)_{y_i} + log \sum_j e^{f(x_i)_j}
   # Compute vector of stacked correct f-scores: [f(x_1)_{y_1}, ..., f(x_N)_{y_N}]
   # (where N = num_train)
-  f_correct = f[y, range(num_train)]
-  loss = -np.mean( np.log(np.exp(f_correct)/np.sum(np.exp(f))) )
+  # f_correct = f[y, range(num_train)]
+  # expf_correct = np.exp(f_correct)
 
-  # Gradient: dw_j = 1/num_train * \sum_i[x_i * (p(y_i = j)-Ind{y_i = j} )]
-  p = np.exp(f)/np.sum(np.exp(f), axis=0)
-  ind = np.zeros(p.shape)
-  ind[y, range(num_train)] = 1
-  dW = np.dot((p-ind), X.T)
+  # loss = -np.mean( np.log(np.exp(f_correct)/np.sum(np.exp(f))) )
+
+  q = expf/sum_expf
+  qyi = q[y, range(num_train)]
+  print qyi
+  loss = -np.mean(np.log(qyi))
+  # print 'q =================='
+  # print q
+
+  p = np.zeros(q.shape)
+  # print 'p =================='
+  # print p
+
+  p[y, range(num_train)] = 1
+  dW = np.dot((q-p), X.T)
   dW /= num_train
 
   # Regularization

@@ -125,8 +125,6 @@ print scores[a,b]
         mask = np.arange(num_training)
         X_train = X_train[mask]
 
-'''trivia'''
-        np.mean(X_train, axis=0)
 
 '''truncating array'''
         a = np.random.randint(low=0,high=10,size=(4,11))
@@ -170,6 +168,12 @@ print scores[a,b]
       print np.maximum(0,x)
       zeros2 = np.zeros((1,x.shape[1]))
       print np.maximum(zeros2,x)
+
+
+'''trivia'''
+        np.mean(X_train, axis=0)
+        a = np.arange(3, dtype=np.float)
+        np.zeros_like(a)
 
 ================ collections / Counter Tricks ================
 from collections import Counter

@@ -10,8 +10,14 @@
 
 import numpy as np
 
-# # interesting linear functions
-# print np.minimum(0,-10)
-# a = np.arange(10)
-# print a.clip(1,8)
-
+# f = np.arange(10).reshape(2,5)
+# print "f =============="
+# print f
+# # f -= np.max(f,axis=1,keepdims=True)
+# f -= np.max(f)
+# print "f =============="
+# print f
+# # print "f =============="
+# # print f
+print np.log(10.8676066442)
+print -np.log(0.1)
