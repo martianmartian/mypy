@@ -90,6 +90,8 @@ def softmax_loss_vectorized(W, X, y, reg):
 
   q = expf/sum_expf
   qyi = q[y, range(num_train)]
+  # print qyi
+  qyi+=0.00001
   loss = -np.mean(np.log(qyi))
 
   p = np.zeros(q.shape)
@@ -97,7 +99,7 @@ def softmax_loss_vectorized(W, X, y, reg):
   # print p
 
   p[y, range(num_train)] = 1
-  dW = np.dot((q-p), X.T)
+  dW = np.dot((q-p), X.T)  #this is original
   dW /= num_train
 
   # Regularization

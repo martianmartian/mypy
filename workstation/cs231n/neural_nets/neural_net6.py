@@ -35,12 +35,9 @@ class TwoLayerNet(object):
     """
     self.params = {}
     self.params['W1'] = std * np.random.randn(input_size, hidden_size)
-    self.params['b1'] = np.random.random(hidden_size)
-    # self.params['b1'] = np.zeros(hidden_size)
+    self.params['b1'] = np.zeros(hidden_size)
     self.params['W2'] = std * np.random.randn(hidden_size, output_size)
-    # self.params['b2'] = np.zeros(output_size)
-    self.params['b2'] = np.random.random(output_size)
-    
+    self.params['b2'] = np.zeros(output_size)
 
   def loss(self, X, y=None, reg=0.0):
     """
@@ -68,7 +65,7 @@ class TwoLayerNet(object):
     # Unpack variables from the params dictionary
     W1, b1 = self.params['W1'], self.params['b1']
     W2, b2 = self.params['W2'], self.params['b2']
-    N, D = X.shape  # NxD
+    N, D = X.shape
     C = b2.shape[0]
 
     # Compute the forward pass
@@ -84,6 +81,7 @@ class TwoLayerNet(object):
     X2 = X1.dot(W2) + b2
 
     scores = X2
+    #scores =  exp_X2
     
     #############################################################################
     #                              END OF YOUR CODE                             #
@@ -95,11 +93,13 @@ class TwoLayerNet(object):
    
     loss = 0.0
 
-    # Creating a output matrix from output vector X2
-    # p is the correct distribution
-    p = np.zeros(scores.shape) 
-    p[range(N),y] = 1
-
+    # Creating a output matrix from output vector
+    # X2 is the output
+    Y = np.zeros(scores.shape)
+    for i,row in enumerate(Y):
+        print i,row
+        row[y[i]] = 1
+    print Y
     # Compute the loss
     
     #############################################################################
@@ -107,20 +107,18 @@ class TwoLayerNet(object):
     # both the data loss and L2 regularization for W1 and W2. Store the result  #
     # in the variable loss, which should be a scalar. Use the Softmax           #
     # classifier loss. So that your results match ours, multiply the            #
-    # regularization loss by 0.5 ??                                             #
+    # regularization loss by 0.5                                                #
     #############################################################################
     
     #Exponentiating the X2 , then normalizing the exponentiated value
-
-    exp_scores = pow(math.e, scores) # NxC
-    q   = (exp_scores.T/np.sum(exp_scores, axis = 1)).T
-    qyi = q[range(N),y]
-    qyi += 0.00001
-    loss = -np.mean(np.log(qyi))
-    loss += 0.5*reg*np.sum(W1 * W1) + 0.5*reg*np.sum(W2 * W2)
-    # print loss
-
-
+    exp_X2 = pow(math.e, X2)
+    scores   = (exp_X2.T/np.sum(exp_X2, axis = 1)).T
+    
+    for i in range(N):
+      loss -= np.log( scores[i][y[i]] )
+    loss /= N
+    loss += 0.5*reg*np.sum(W1 * W1)  
+    loss += 0.5*reg*np.sum(W2 * W2)  
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
@@ -134,8 +132,7 @@ class TwoLayerNet(object):
     #############################################################################
 
     #Back propagation
-
-    dX2 = q - p
+    dX2 = scores - Y
     dW2 = ((dX2.T).dot(X1)).T/N + reg*W2
     db2 = (dX2.T).dot(np.ones(X1.shape[0]))/N
     dX1 = dX2.dot(W2.T)
