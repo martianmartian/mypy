@@ -12,6 +12,7 @@ from cs231n.im2col import *
 
 def conv_forward_im2col(x, w, b, conv_param):
   """
+  conv_forward_fast
   A fast implementation of the forward pass for a convolutional layer
   based on im2col and col2im.
   """
@@ -105,6 +106,7 @@ def conv_backward_strides(dout, cache):
 
 def conv_backward_im2col(dout, cache):
   """
+  conv_backward_fast
   A fast implementation of the backward pass for a convolutional layer
   based on im2col and col2im.
   """

@@ -9,7 +9,7 @@ def affine_forward(x, w, b):
   examples, where each example x[i] has shape (d_1, ..., d_k). We will
   reshape each input into a vector of dimension D = d_1 * ... * d_k, and
   then transform it to an output vector of dimension M.
-
+  M=(C or K)
   Inputs:
   - x: A numpy array containing input data, of shape (N, d_1, ..., d_k)
   - w: A numpy array of weights, of shape (D, M)
@@ -27,7 +27,8 @@ def affine_forward(x, w, b):
   x_shape = x.shape
   #Reshaping it as N*D
   #x_shape[0] is equal to N
-  x = x.reshape( [ x_shape[0], np.prod( x_shape[1:]) ] )
+  # x = x.reshape( [ x_shape[0], np.prod( x_shape[1:]) ] )
+  x = x.reshape(x_shape[0],-1)
   
   #Taking dot product of X(N,D) and Y(D,M) and adding the bias
   out = x.dot(w) + b
@@ -104,7 +105,7 @@ def relu_backward(dout, cache):
 
   Input:
   - dout: Upstream derivatives, of any shape
-  - cache: Input x, of same shape as dout
+  - cache: Input x, of same shape as dout; it's usually y, not x... 
 
   Returns:
   - dx: Gradient with respect to x
@@ -186,6 +187,7 @@ def batchnorm_forward(x, gamma, beta, bn_param):
     running_var  = momentum * running_var  + (1 - momentum) * sample_var
     
     x_hat = ( x - sample_mean )/(np.sqrt( sample_var + eps ))
+    '''this shouldn't be here... normalizing every update is a waste'''
     out = x_hat*gamma + beta
     
     cache = (gamma, beta, sample_var, sample_mean, x_hat, x , eps)
@@ -448,13 +450,13 @@ def dropout_backward(dout, cache):
   return dx
 
 
-def cconv_forward_naive(x, w, b, conv_param):
+def conv_forward_naive(x, w, b, conv_param):
   """
   A naive implementation of the forward pass for a convolutional layer.
 
   The input consists of N data points, each with C channels, height H and width
   W. We convolve each input with F different filters, where each filter spans
-  all C channels and has height HH and width HH.
+  all C channels and has height HH and width WW.
 
   Input:
   - x: Input data of shape (N, C, H, W)
@@ -476,8 +478,8 @@ def cconv_forward_naive(x, w, b, conv_param):
   F, C, HH, WW = w.shape
   stride = conv_param['stride']
   pad = conv_param['pad']
-  
-  
+
+
   Ho = 1 + (H + 2 * pad - HH)/stride
   Wo = 1 + (W + 2 * pad - WW)/stride
   out = np.zeros( (N, F, Ho, Wo) )
@@ -494,7 +496,9 @@ def cconv_forward_naive(x, w, b, conv_param):
     for i2 in xrange(F):
       for i3 in xrange(Ho):
         for i4 in xrange(Wo):
-          out[i1,i2,i3,i4]=np.sum(x[i1, : , i3*stride:i3*stride+HH, i4*stride:i4*stride+WW]*w[i2,:,:,:]) + b[i2]
+          index3 = range(i3*stride,i3*stride+HH)
+          index4 = range(i4*stride,i4*stride+WW)
+          out[i1,i2,i3,i4] = np.sum(x[i1, : , index3, index4]*w[i2,:,:,:]) + b[i2]
 
   #############################################################################
   #                             END OF YOUR CODE                              #
@@ -503,7 +507,7 @@ def cconv_forward_naive(x, w, b, conv_param):
   return out, cache
 
 
-def cconv_backward_naive(dout, cache):
+def conv_backward_naive(dout, cache):
   """
   A naive implementation of the backward pass for a convolutional layer.
 
@@ -582,7 +586,9 @@ def max_pool_forward_naive(x, pool_param):
     for i2 in xrange(C):
       for i3 in xrange(Ho):
         for i4 in xrange(Wo):
-          out[i1, i2, i3, i4] = np.max(x[i1, i2 , i3*stride:i3*stride+pool_height, i4*stride:i4*stride+pool_width])
+          index3 = range(i3*stride, i3*stride+pool_height)
+          index4 = range(i4*stride, i4*stride+pool_width)
+          out[i1, i2, i3, i4] = np.max(x[i1, i2 , index3 , index4])
 
   #############################################################################
   #                             END OF YOUR CODE                              #

@@ -116,6 +116,25 @@ print scores[a,b]
         print img.reshape(3, -1)
         print "=================="
 
+        num_inputs = 2
+        input_shape = (4, 5, 6)
+        x = np.linspace(-0.1, 0.5, num=input_size).reshape(num_inputs, *input_shape)
+        #(2, 4, 5, 6)
+
+
+'''high dimension vector product'''
+  need improvement
+num_inputs = 2
+input_shape = (4, 5, 6)
+output_dim = 3
+input_size = num_inputs * np.prod(input_shape)
+weight_size = output_dim * np.prod(input_shape)
+x = np.linspace(-0.1, 0.5, num=input_size).reshape(num_inputs, *input_shape)
+w = np.linspace(-0.2, 0.3, num=weight_size).reshape(np.prod(input_shape), output_dim)
+x = x.reshape(x.shape[0],-1)
+out = x.dot(w)
+print out.shape
+
 
 ''' Subsample the data '''
         # X_train = np.random.random(50000)
@@ -138,6 +157,18 @@ print scores[a,b]
         print a[:-1,:]
         print a[:-3,:]
         print a[:-2,:-2]
+'''image cropping'''
+        kitten, puppy = imread('data_image/kitten.jpg'), imread('data_image/puppy.jpg')
+        # (266, 400, 3)kitten is wide, 
+        # (517, 517, 3)puppy is already square
+        
+        d = kitten.shape[1] - kitten.shape[0]
+        kitten_cropped = kitten[:, d/2:-d/2, :] # (266, 266, 3)
+
+        kitten, puppy = imread('data_image/kitten.jpg'), imread('data_image/puppy.jpg')
+        img_size = 200
+        puppy = imresize(puppy, (img_size, img_size))
+
 
 '''# summation with specified signs/magnitude from index'''
         x = np.arange(10)  # 45 total

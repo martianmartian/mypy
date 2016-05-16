@@ -29,6 +29,34 @@ def load_CIFAR10(ROOT):
   return Xtr, Ytr, Xte, Yte
 
 
+def load_CIFAR10_mini(ROOT):
+    """
+    load only one CIFAR-10 dataset
+    
+    code is adapted from CS231n assignment kit
+    
+    @param ROOT: string of data folder
+    @return: Xtr, Ytr: training data and labels
+    @return: Xte, Yte: testing data and labels
+    """
+    
+    xs=[];
+    ys=[];
+
+    f=os.path.join(ROOT, "data_batch_1");
+    X, Y=load_CIFAR_batch(f);
+    xs.append(X);
+    ys.append(Y);
+
+    Xtr=np.concatenate(xs);
+    Ytr=np.concatenate(ys);
+    
+    del X, Y;
+    
+    Xte, Yte=load_CIFAR_batch(os.path.join(ROOT, "test_batch"));
+    
+    return Xtr, Ytr, Xte, Yte;
+
 def get_CIFAR10_data(num_training=49000, num_validation=1000, num_test=1000):
     """
     Load the CIFAR-10 dataset from disk and perform preprocessing to prepare
