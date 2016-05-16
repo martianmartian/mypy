@@ -16,13 +16,14 @@ from nets231.neural_net import TwoLayerNet
 from facilities.faci_start import *
 
 from facilities.data_utils import get_CIFAR10_data_mini
-X_train, y_train, X_val, y_val, X_test, y_test = get_CIFAR10_data_mini()
+X_train, y_train, X_val, y_val, X_test, y_test, X_NxD = get_CIFAR10_data_mini()
 
 ''' ========= special settings =========  '''
 np.random.seed(0)
 ''' 
 done: 
   no normalize=True
+  pass X_NxD, to acoid X.T in loss function
 
 working on:
   X_train shape changed to : D x N
@@ -41,8 +42,8 @@ net = TwoLayerNet(input_size, hidden_size, num_classes)
 # scores = net.loss(X_train)
 # print scores.shape
 
-# loss, _ = net.loss(X_train, y_train, reg=0.1)
-# print loss
+loss, _ = net.loss(X_train, X_NxD, y_train, reg=0.1)
+print loss
 
 
 # Train the network

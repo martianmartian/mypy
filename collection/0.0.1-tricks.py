@@ -278,6 +278,7 @@ from collections import Counter
         time = time_function(reshape, x)
         print time
 
+
 '''or'''
       import time
       tic = time.time()
@@ -296,4 +297,8 @@ from collections import Counter
       difference = np.linalg.norm(grad_naive - grad_vectorized, ord='fro')
       print 'difference: %f' % difference
 
-
+'''cool'''
+      import timeit
+      setup = 'import numpy as np; a=np.random.random(1000); b = np.random.random(1000)'
+      print [timeit.timeit('np.dot(a,b)',setup,number=100000) for _ in range(3)]
+      print [timeit.timeit('np.inner(a,b)',setup,number=100000) for _ in range(3)]

@@ -25,7 +25,7 @@ class TwoLayerNet(object):
     Loss function: Softmax
   """
 
-  def __init__(self, input_size, hidden_size, num_classes, std=1e-4, X_shape="DxN"):
+  def __init__(self, input_size, hidden_size, num_classes, std=1e-4):
     """
       ------------
       Initialize:
@@ -39,17 +39,17 @@ class TwoLayerNet(object):
         W2: Second layer weights; has shape (C, H)
         b2: Second layer biases; has shape (C,)
     """
+    # X_shape="DxN"
     self.params = {}
-    if(X_shape=="DxN"):
-      self.params['W1'] = std * np.random.randn(hidden_size , input_size)
-      self.params['b1'] = np.zeros((hidden_size,1))
-      # self.params['b1'] = np.random.random(hidden_size)
-      self.params['W2'] = std * np.random.randn(num_classes , hidden_size)
-      self.params['b2'] = np.zeros((num_classes,1))
-      # self.params['b2'] = np.random.random(num_classes)
+    self.params['W1'] = std * np.random.randn(hidden_size , input_size)
+    self.params['b1'] = np.zeros((hidden_size,1))
+    # self.params['b1'] = np.random.random(hidden_size)
+    self.params['W2'] = std * np.random.randn(num_classes , hidden_size)
+    self.params['b2'] = np.zeros((num_classes,1))
+    # self.params['b2'] = np.random.random(num_classes)
 
 
-  def loss(self, X, y=None, reg=0.0, X_shape="DxN"):
+  def loss(self, X, X_NxD, y=None, reg=0.0):
     """
       ------------
       Inputs:
@@ -111,16 +111,14 @@ class TwoLayerNet(object):
 
     '''equation'''
     distri_diff = p - q
-    dW2 = np.dot(distri_diff,X1.T)/N - reg*W2
+    dW2 = np.dot(distri_diff, X1.T)/N - reg*W2
     db2 = distri_diff.mean(axis=1, keepdims=True)
-    # print db2
-    indi_matrix = X1>0
-    dX1 = np.dot(W2.T, distri_diff) * indi_matrix
-    dW1 = np.dot(dX1, X.T)/N - reg*W1
+    dX1 = np.dot(W2.T, distri_diff) * (X1>0) # relu_indi
+    dW1 = np.dot(dX1, X_NxD)/N - reg*W1
     db1 = dX1.mean(axis=1, keepdims=True)
     # print db1[0:10]   0 ????
     # print db1.max()
-    # '''attention: db1 is calculated after dX1 and indi_matrix mutiplication
+    # '''attention: db1 is calculated after dX1 and relu_indi mutiplication
     #   the original version was before. see what's different''
       
     grads['W2'] = dW2
