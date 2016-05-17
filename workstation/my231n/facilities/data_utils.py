@@ -38,7 +38,7 @@ def load_CIFAR10_mini(ROOT):
     Xte, Yte=load_CIFAR_batch(os.path.join(ROOT, "test_batch"));
     return Xtr, Ytr, Xte, Yte;
 def get_CIFAR10_data_mini(num_training=9000, num_validation=1000, num_test=100, 
-    cifar10_dir = "data_image/cifar-10-batches-py", normalize=False):
+    cifar10_dir = "data_image/cifar-10-batches-py", normalize=False, newT=False):
     """
     Load the CIFAR-10 dataset
     pre-process for two-layer neural net classifier.
@@ -69,12 +69,12 @@ def get_CIFAR10_data_mini(num_training=9000, num_validation=1000, num_test=100,
     X_val = X_val.reshape(num_validation, -1)
     X_test = X_test.reshape(num_test, -1)
 
-    X_NxD = X_train
-    X_train = X_train.T
-    X_val = X_val.T
-    X_test = X_test.T
+    if(newT==False):
+      X_train = X_train.T  # becomes D x N
+      X_val = X_val.T
+      X_test = X_test.T
 
-    return X_train, y_train, X_val, y_val, X_test, y_test, X_NxD
+    return X_train, y_train, X_val, y_val, X_test, y_test
 
 # def get_CIFAR10_data_mini(num_training=9000, num_validation=1000, num_test=1000):
 #     """

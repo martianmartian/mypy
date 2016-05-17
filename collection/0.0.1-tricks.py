@@ -55,6 +55,20 @@ print scores[a,b]
     print fruit
 
 
+'''random.choice'''
+      '''case one:'''
+        #Dropout on X
+        dropout_fraction = 0.5
+        print np.random.choice([0, 1], size=(4,30), p=[dropout_fraction,1-dropout_fraction])
+        # Binom_variables = np.random.choice([0, 1], size=X.shape, p=[dropout_fraction,1-dropout_fraction])
+        # X = (X*Binom_variables)/(1-dropout_fraction)
+      
+      '''case two '''
+        num_train = 9000
+        batch_size = 400
+        batch_indicies = np.random.choice(num_train, batch_size, replace = False)
+        print batch_indicies
+
 '''argsort inexing'''
         ---- sort labels based on respect values  ----
 
@@ -101,6 +115,14 @@ print scores[a,b]
           # np.mean(Yte_predict == Yte)
         accuracy = float(num_correct) / num_test
         print 'Got %d / %d correct => accuracy: %f' % (num_correct, num_test, accuracy)
+
+
+                                '''another example...'''
+                                a = np.arange(10)
+                                b = a*(a<2)
+                                print b
+                                print (a==b).mean()
+
 
 '''high dimension vector reshape'''
         X_train = np.random.random((100,5,5,2))
@@ -302,3 +324,9 @@ from collections import Counter
       setup = 'import numpy as np; a=np.random.random(1000); b = np.random.random(1000)'
       print [timeit.timeit('np.dot(a,b)',setup,number=100000) for _ in range(3)]
       print [timeit.timeit('np.inner(a,b)',setup,number=100000) for _ in range(3)]
+
+
+================ data stats ================
+'''basic stats'''
+import pandas as pd
+print pd.Series(a[0]).describe()

@@ -35,7 +35,12 @@ import simplejson
 
 def log(x, name="x"):
     '''# db = pickledb(location, option) is at bottom'''
-    db.log(x, name)
+    '''this is for 2-d array'''
+    a = {}
+    for i in range(x.shape[0]):
+        a[i] = list(x[i])
+        db.log(a)
+
 
 class pickledb(object):
 

@@ -5,7 +5,7 @@ import math, time
 
 
 '''# relu = lambda x: x * (x > 0)'''
-eps = 0.00001
+eps = 0.0001
 class TwoLayerNet(object):
   """ 
     ------------
@@ -49,7 +49,7 @@ class TwoLayerNet(object):
     # self.params['b2'] = np.random.random(num_classes)
 
 
-  def loss(self, X, X_NxD, y=None, reg=0.0):
+  def loss(self, X, y=None, reg=0.0):
     """
       ------------
       Inputs:
@@ -109,12 +109,17 @@ class TwoLayerNet(object):
     # Backward pass: compute gradients
     grads = {}
 
+    # print 'X1[0:2,0:20]'
+    # print X1[0:2,0:20]
+    # print "=========="
+
     '''equation'''
     distri_diff = p - q
     dW2 = np.dot(distri_diff, X1.T)/N - reg*W2
     db2 = distri_diff.mean(axis=1, keepdims=True)
-    dX1 = np.dot(W2.T, distri_diff) * (X1>0) # relu_indi
-    dW1 = np.dot(dX1, X_NxD)/N - reg*W1
+    dX1 = np.dot(W2.T, distri_diff)
+    dF1 = dX1*(X1>0)
+    dW1 = np.dot(dF1, X.T)/N - reg*W1
     db1 = dX1.mean(axis=1, keepdims=True)
     # print db1[0:10]   0 ????
     # print db1.max()
@@ -133,66 +138,40 @@ class TwoLayerNet(object):
             reg=1e-5, num_iters=100,
             batch_size=200, verbose=False ,dropout_fraction = 0):
     """
-    Train this neural network using stochastic gradient descent.
-
+    SGD.
     Inputs:
-    - X: A numpy array of shape (N, D) giving training data.
-    - y: A numpy array f shape (N,) giving training labels; y[i] = c means that
-      X[i] has label c, where 0 <= c < C.
-    - X_val: A numpy array of shape (N_val, D) giving validation data.
-    - y_val: A numpy array of shape (N_val,) giving validation labels.
     - learning_rate: Scalar giving learning rate for optimization.
-    - learning_rate_decay: Scalar giving factor used to decay the learning rate
-      after each epoch.
-    - reg: Scalar giving regularization strength.
-    - num_iters: Number of steps to take when optimizing.
-    - batch_size: Number of training examples to use per step.
-    - verbose: boolean; if true print progress during optimization.
+    - learning_rate_decay: Scalar to decay the learning rate after each epoch.
+    - reg: Scalar: regularization strength.
+    - num_iters: iteration
+    - batch_size: minibatch size
+    - verbose: true: print progress
     """
     
-    #Dropout
-    Binom_variables = np.random.choice([0, 1], size=X.shape, p=[dropout_fraction,1-dropout_fraction])
-    X = (X*Binom_variables)/(1-dropout_fraction)
+    # #Dropout on X... 
+    # '''change this to dropout on weights ...... '''
+    # Binom_variables = np.random.choice([0, 1], size=X.shape, p=[dropout_fraction,1-dropout_fraction])
+    # X = (X*Binom_variables)/(1-dropout_fraction)
     
-    
-    num_train = X.shape[0]
+    num_train = X.shape[1]
     iterations_per_epoch = max(num_train / batch_size, 1)
-    val_acc = 0
 
-    # Use SGD to optimize the parameters in self.model
+    val_acc = 0
     loss_history = []
     train_acc_history = []
     val_acc_history = []
 
     for it in xrange(num_iters):
-
-
-      #########################################################################
-      # TODO: Create a random minibatch of training data and labels, storing  #
-      # them in X_batch and y_batch respectively.                             #
-      #########################################################################
+      '''minibatch'''
       batch_indicies = np.random.choice(num_train, batch_size, replace = False)
-      X_batch = X[batch_indicies]
+      X_batch = X[:,batch_indicies]
       y_batch = y[batch_indicies]
-      #########################################################################
-      #                             END OF YOUR CODE                          #
-      #########################################################################
 
-      # Compute loss and gradients using the current minibatch
       loss, grads = self.loss(X_batch, y=y_batch, reg=reg)
       loss_history.append(loss)
 
-      #########################################################################
-      # TODO: Use the gradients in the grads dictionary to update the         #
-      # parameters of the network (stored in the dictionary self.params)      #
-      # using stochastic gradient descent. You'll need to use the gradients   #
-      # stored in the grads dictionary defined above.                         #
-      #########################################################################
       for variable in self.params:
-          self.params[variable] -= learning_rate*grads[variable]
-      #########################################################################
-      #                             END OF YOUR CODE                          #
-      #########################################################################
+          self.params[variable] += learning_rate*grads[variable]  # this for p - q
 
       if verbose and it % 100 == 0:
         val_acc = (self.predict(X_val) == y_val).mean()
@@ -200,7 +179,6 @@ class TwoLayerNet(object):
 
       # Every epoch, check train and val accuracy and decay learning rate.
       if it % iterations_per_epoch == 0:
-        # Check accuracy
         train_acc = (self.predict(X_batch) == y_batch).mean()
         val_acc = (self.predict(X_val) == y_val).mean()
         train_acc_history.append(train_acc)
@@ -215,34 +193,14 @@ class TwoLayerNet(object):
     }
 
   def predict(self, X):
-    """
-    Use the trained weights of this two-layer network to predict labels for
-    data points. For each data point we predict scores for each of the C
-    classes, and assign each data point to the class with the highest score.
-
-    Inputs:
-    - X: A numpy array of shape (N, D) giving N D-dimensional data points to
-      classify.
-
-    Returns:
-    - y_pred: A numpy array of shape (N,) giving predicted labels for each of
-      the elements of X. For all i, y_pred[i] = c means that X[i] is predicted
-      to have class c, where 0 <= c < C.
-    """
     y_pred = None
-
-    ###########################################################################
-    # TODO: Implement this function; it should be VERY simple!                #
-    ###########################################################################
-    X1 = np.maximum( X.dot(self.params['W1']) + self.params['b1'], 0 )
-    X2 = X1.dot(self.params['W2']) + self.params['b2']
-    exp_X2 = pow(math.e, X2)
-    scores   = (exp_X2.T/np.sum(exp_X2, axis = 1)).T
-    
-    y_pred = np.argmax(scores, axis = 1)
-    ###########################################################################
-    #                              END OF YOUR CODE                           #
-    ###########################################################################
+    X1 = np.maximum(0, np.dot(self.params['W1'],X)+self.params['b1'])
+    X2 = np.dot(self.params['W2'],X1) + self.params['b2']
+    scores = X2
+    scores -= np.max(scores, axis=0)
+    exp_scores = pow(math.e, scores)
+    q   = (exp_scores/np.sum(exp_scores, axis = 0))
+    y_pred = np.argmax(q, axis = 0)
     return y_pred
 
 
