@@ -124,6 +124,7 @@ class TwoLayerNet(object):
 
 class FullyConnectedNet(object):
   """
+  arbitrary number of hidden layers
   A fully-connected neural network with an arbitrary number of hidden layers,
   ReLU nonlinearities, and a softmax loss function. This will also implement
   dropout and batch normalization as options. For a network with L layers,

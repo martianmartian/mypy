@@ -71,19 +71,14 @@ class TwoLayerNet(object):
     D, N = X.shape
     C = b2.shape[0]
 
-    # Compute the forward pass
+    '''# Compute the forward pass'''
     scores = None
-    #############################################################################
-    # Perform the forward pass, computing the class scores for the input.       #
-    # Store the result in the scores variable, which should be an array of      #
-    # shape (N, C).                                                             #
-    #############################################################################
+
     X1 = np.maximum(0, np.dot(W1,X)+b1)
     X2 = np.dot(W2,X1) + b2
 
     scores = X2
     
-    # If the targets are not given then jump out, we're done
     if y is None:
       return scores
    
@@ -94,27 +89,26 @@ class TwoLayerNet(object):
     p = np.zeros(scores.shape) 
     p[y, range(N)] = 1
 
-    # Compute the loss
+    '''# Compute the loss'''
     
-    #############################################################################
-    # Why mutiply the regularization loss by 0.5 ??                                             #
-    #############################################################################
     scores -= np.max(scores, axis=0)
     exp_scores = pow(math.e, scores)
     q   = (exp_scores/np.sum(exp_scores, axis = 0))
     qyi = q[y, range(N)] + eps
     loss = -np.mean(np.log(qyi))
     loss += 0.5*reg*(np.sum(W1 * W1) + np.sum(W2 * W2))
+    # Why mutiply the regularization loss by 0.5 ??  
 
-    # Backward pass: compute gradients
+    '''# Backward pass: compute gradients'''
     grads = {}
 
     # print 'X1[0:2,0:20]'
     # print X1[0:2,0:20]
     # print "=========="
 
-    '''equation'''
+    '''equation dW1 = (p-q) x W2 x indi x X.T'''
     distri_diff = p - q
+
     dW2 = np.dot(distri_diff, X1.T)/N - reg*W2
     db2 = distri_diff.mean(axis=1, keepdims=True)
     dX1 = np.dot(W2.T, distri_diff)
@@ -138,14 +132,14 @@ class TwoLayerNet(object):
             reg=1e-5, num_iters=100,
             batch_size=200, verbose=False ,dropout_fraction = 0):
     """
-    SGD.
-    Inputs:
-    - learning_rate: Scalar giving learning rate for optimization.
-    - learning_rate_decay: Scalar to decay the learning rate after each epoch.
-    - reg: Scalar: regularization strength.
-    - num_iters: iteration
-    - batch_size: minibatch size
-    - verbose: true: print progress
+      SGD.
+      Inputs:
+      - learning_rate: Scalar giving learning rate for optimization.
+      - learning_rate_decay: Scalar to decay the learning rate after each epoch.
+      - reg: Scalar: regularization strength.
+      - num_iters: iteration
+      - batch_size: minibatch size
+      - verbose: true: print progress
     """
     
     # #Dropout on X... 

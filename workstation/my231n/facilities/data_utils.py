@@ -38,7 +38,7 @@ def load_CIFAR10_mini(ROOT):
     Xte, Yte=load_CIFAR_batch(os.path.join(ROOT, "test_batch"));
     return Xtr, Ytr, Xte, Yte;
 def get_CIFAR10_data_mini(num_training=9000, num_validation=1000, num_test=100, 
-    cifar10_dir = "data_image/cifar-10-batches-py", normalize=False, newT=False):
+    cifar10_dir = "data_image/cifar-10-batches-py", zero_center=True, newT=False):
     """
     Load the CIFAR-10 dataset
     pre-process for two-layer neural net classifier.
@@ -58,11 +58,12 @@ def get_CIFAR10_data_mini(num_training=9000, num_validation=1000, num_test=100,
     y_test = y_test[mask]
 
     # Normalize the data: subtract the mean image
-    if(normalize==True):
+    if(zero_center==True):
       mean_image = np.mean(X_train, axis=0)
       X_train -= mean_image
       X_val -= mean_image
       X_test -= mean_image
+
       
     # Reshape data to rows
     X_train = X_train.reshape(num_training, -1)
@@ -137,14 +138,17 @@ def load_CIFAR10(ROOT):
   return Xtr, Ytr, Xte, Yte
 
 
-def get_CIFAR10_data(num_training=49000, num_validation=1000, num_test=1000):
+def get_CIFAR10_data(num_training=49000, num_validation=1000, num_test=1000, 
+  cifar10_dir = "data_image/cifar-10-batches-py", normalize=False, newT=False):
     """
     Load the CIFAR-10 dataset from disk and perform preprocessing to prepare
     it for classifiers. These are the same steps as we used for the SVM, but
     condensed to a single function.
     """
+
+
     # Load the raw CIFAR-10 data
-    cifar10_dir = 'data_image/cifar-10-batches-py'
+    # cifar10_dir = 'data_image/cifar-10-batches-py'
     X_train, y_train, X_test, y_test = load_CIFAR10(cifar10_dir)
         
     # Subsample the data
@@ -159,15 +163,27 @@ def get_CIFAR10_data(num_training=49000, num_validation=1000, num_test=1000):
     y_test = y_test[mask]
 
     # Normalize the data: subtract the mean image
-    mean_image = np.mean(X_train, axis=0)
-    X_train -= mean_image
-    X_val -= mean_image
-    X_test -= mean_image
+    if(normalize==True):
+      mean_image = np.mean(X_train, axis=0)
+      X_train -= mean_image
+      X_val -= mean_image
+      X_test -= mean_image
     
-    # Transpose so that channels come first
-    X_train = X_train.transpose(0, 3, 1, 2).copy()
-    X_val = X_val.transpose(0, 3, 1, 2).copy()
-    X_test = X_test.transpose(0, 3, 1, 2).copy()
+    # # Transpose so that channels come first
+    # X_train = X_train.transpose(0, 3, 1, 2).copy()
+    # X_val = X_val.transpose(0, 3, 1, 2).copy()
+    # X_test = X_test.transpose(0, 3, 1, 2).copy()
+
+    # Reshape data to rows
+    X_train = X_train.reshape(num_training, -1)
+    X_val = X_val.reshape(num_validation, -1)
+    X_test = X_test.reshape(num_test, -1)
+
+
+    if(newT==False):
+      X_train = X_train.T  # becomes D x N
+      X_val = X_val.T
+      X_test = X_test.T
 
     # Package data into a dictionary
     return {

@@ -1,5 +1,17 @@
 import numpy as np
 
+
+
+
+
+
+
+
+
+
+
+
+
 eps = 0.0001
 class Affine(object):
   """

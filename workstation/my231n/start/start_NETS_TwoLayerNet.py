@@ -7,36 +7,45 @@
 #  \      /
 #   `----'
 
+
+# ''' ========= special settings =========  '''
+#   ''' 
+#   done: 
+#     no normalize=True
+#     pass X_NxD, to acoid X.T in loss function
+#     p-q, not q-p
+#     X_train shape changed to : D x N
+
+#   working on:
+#     dropout on weights. postpone it to next level
+#   '''
+# ''' ========= end =========  '''
+
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from facilities.faci_start import *
 
 
-from nets231.TwoLayerNet import TwoLayerNet
 
+'''get data ready'''
 from facilities.data_utils import get_CIFAR10_data_mini
 X_train, y_train, X_val, y_val, X_test, y_test = get_CIFAR10_data_mini()
 # X_train, y_train, X_val, y_val, X_test, y_test = get_CIFAR10_data_mini(normalize=True)
-
-''' ========= special settings =========  '''
-np.random.seed(0)
-''' 
-done: 
-  no normalize=True
-  pass X_NxD, to acoid X.T in loss function
-  p-q, not q-p
-  X_train shape changed to : D x N
-
-working on:
-  dropout on weights. postpone it to next level
-'''
-''' ========= end =========  '''
 # X_shape="DxN"
 
+
+
+
+
+np.random.seed(0)
+'''get layer ready'''
 # this value should be decided by the data... eventually
 input_size = 32 * 32 * 3
 hidden_size = 180  
 num_classes = 10
+from LAYERS.NETS.TwoLayerNet import TwoLayerNet
 net = TwoLayerNet(input_size, hidden_size, num_classes)
 
 # print X_train.shape
